@@ -22,6 +22,23 @@ class UserController extends Controller
         return view('user.seeker-register');
     }
 
+    public function storeSeeker(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+        ]);
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'user_type' => self::JOB_SEEKER,
+        ]);
+        return redirect()->route('login')->with('success', 'Your account was created!');
+    }
+
     public function createEmployer()
     {
         return view('user.employer-register');
@@ -40,23 +57,7 @@ class UserController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'user_type' => self::JOB_POSTER,
-        ]);
-        return redirect()->route('login')->with('success', 'Your account was created!');
-    }
-
-    public function storeSeeker(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
-        ]);
-
-        User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-            'user_type' => self::JOB_SEEKER,
+            'user_trial'=>now()->addWeek(),
         ]);
         return redirect()->route('login')->with('success', 'Your account was created!');
     }

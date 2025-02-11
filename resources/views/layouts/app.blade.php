@@ -7,6 +7,8 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+        @stack('style')
 </head>
 
 <body>
@@ -38,6 +40,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="logout" href="#">Logout</a>
                         </li>
+                        <li class="nav-item">
+                            <b class="nav-link text-light">{{ auth()->user()->name }}</b>
+                        </li>
                     @endif
 
                     <form id="form-logout" method="POST" action="{{ route('logout') }}">@csrf</form>
@@ -62,6 +67,8 @@
             form.submit();
         })
     </script>
+
+    @stack('script')
 </body>
 
 </html>
