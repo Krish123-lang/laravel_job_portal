@@ -30,13 +30,15 @@ class UserController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'user_type' => self::JOB_SEEKER,
         ]);
-        return redirect()->route('login')->with('success', 'Your account was created!');
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
+        return redirect()->route('verification.notice')->with('success', 'Your account was created!');
     }
 
     public function createEmployer()
@@ -52,14 +54,16 @@ class UserController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'user_type' => self::JOB_POSTER,
-            'user_trial'=>now()->addWeek(),
+            'user_trial' => now()->addWeek(),
         ]);
-        return redirect()->route('login')->with('success', 'Your account was created!');
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
+        return redirect()->route('verification.notice')->with('success', 'Your account was created!');
     }
 
     public function login()

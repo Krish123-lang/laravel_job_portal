@@ -8,7 +8,7 @@
         <h3>Hello, {{ auth()->user()->name }}</h3>
 
         @if (Auth::check() && auth()->user()->user_type == 'employer')
-            <p>Your trial will be expired on <b>{{ auth()->user()->user_trial }}</b></p>
+            <p>Your trial {{ now()->format('Y-m-d') > auth()->user()->user_trial ? 'was expired' : 'will expire' }} on <b>{{ auth()->user()->user_trial }}</b></p>
         @endif
     </div>
 
