@@ -23,15 +23,24 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Job seeker</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Employer</a>
-                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('create.seeker') }}">Job seeker</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Employer</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" id="logout" href="#">Logout</a>
+                        </li>
+                    @endif
+
+                    <form id="form-logout" method="POST" action="{{ route('logout') }}">@csrf</form>
                 </ul>
             </div>
         </div>
@@ -44,6 +53,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+    <script>
+        let logout = document.getElementById('logout');
+        let form = document.getElementById('form-logout');
+        logout.addEventListener('click', function() {
+            form.submit();
+        })
     </script>
 </body>
 

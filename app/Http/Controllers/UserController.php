@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -35,5 +36,28 @@ class UserController extends Controller
             'user_type' => self::JOB_SEEKER,
         ]);
         return back();
+    }
+
+    public function login()
+    {
+        return view('user.login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
