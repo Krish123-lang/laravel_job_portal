@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     const JOB_SEEKER = 'seeker';
+    const JOB_POSTER = 'employer';
 
     // public function index()
     // {
@@ -19,6 +20,28 @@ class UserController extends Controller
     public function createSeeker()
     {
         return view('user.seeker-register');
+    }
+
+    public function createEmployer()
+    {
+        return view('user.employer-register');
+    }
+
+    public function storeEmployer(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+        ]);
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'user_type' => self::JOB_POSTER,
+        ]);
+        return redirect()->route('login')->with('success', 'Your account was created!');
     }
 
     public function storeSeeker(Request $request)
@@ -35,7 +58,7 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']),
             'user_type' => self::JOB_SEEKER,
         ]);
-        return back();
+        return redirect()->route('login')->with('success', 'Your account was created!');
     }
 
     public function login()

@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{{ route('create.seeker') }}">Job seeker</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Employer</a>
+                            <a class="nav-link" href="{{ route('create.employer') }}">Employer</a>
                         </li>
                     @else
                         <li class="nav-item">
