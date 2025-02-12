@@ -7,9 +7,16 @@
     <div class="mt-3 text-end">
         <h3>Hello, {{ auth()->user()->name }}</h3>
 
-        @if (Auth::check() && auth()->user()->user_type == 'employer')
-            <p>Your trial {{ now()->format('Y-m-d') > auth()->user()->user_trial ? 'was expired' : 'will expire' }} on <b>{{ auth()->user()->user_trial }}</b></p>
+        @if (!auth()->user()->billing_ends)
+            @if (Auth::check() && auth()->user()->user_type == 'employer')
+                <p>Your trial {{ now()->format('Y-m-d') > auth()->user()->user_trial ? 'was expired' : 'will expire' }} on <b>{{ auth()->user()->user_trial }}</b></p>
+            @endif
         @endif
+
+        @if (Auth::check() && auth()->user()->user_type == 'employer')
+            <p>Your membership {{ now()->format('Y-m-d') > auth()->user()->billing_ends ? 'was expired' : 'will expire' }} on <b>{{ auth()->user()->billing_ends }}</b></p>
+        @endif
+
     </div>
 
     @if (Session::has('success'))
