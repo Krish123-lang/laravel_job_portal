@@ -12,6 +12,14 @@
         @endif
     </div>
 
+    @if (Session::has('success'))
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+    
+    @if (Session::has('error'))
+        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+    @endif
+
     <div class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col">
             <div class="card text-bg-primary h-100 d-flex flex-column">
