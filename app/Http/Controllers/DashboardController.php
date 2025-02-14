@@ -18,12 +18,19 @@ class DashboardController extends Controller
     }
 
     public function resend()
-    {
-        $user = Auth::user();
-        if ($user->hasVerifiedEmail()) {
-            return redirect()->route('dashboard')->with('success', 'Your email was verified!');
-        }
-        $user->sendEmailVerificationNotification();
-        return back()->with('success', 'Verification link sent!');
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Please login first.');
     }
+
+    if ($user->hasVerifiedEmail()) {
+        return redirect()->route('dashboard')->with('success', 'Your email was verified!');
+    }
+
+    $user->sendEmailVerificationNotification();
+
+    return back()->with('success', 'Verification link sent!');
+}
 }

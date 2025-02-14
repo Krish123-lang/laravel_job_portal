@@ -10,7 +10,7 @@ use App\Http\Middleware\isPremium;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-// Route::get('users/', [UserController::class, 'index'])->name('user.index');
+Route::get('/', [UserController::class, 'index'])->name('user.index');
 Route::get('register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker');
 Route::post('register/seeker', [UserController::class, 'storeSeeker'])->name('store.seeker');
 Route::get('login', [UserController::class, 'login'])->name('login');
@@ -30,7 +30,7 @@ Route::post('register/employer', [UserController::class, 'storeEmployer'])->name
 Route::get('verify', [DashboardController::class, 'verify'])->name('verification.notice');
 Route::get('resend/verification/email', [DashboardController::class, 'resend'])->name('resend.email');
 
-Route::get('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware(['auth', isEmployer::class, doNotAllowUserToMakePayment::class]);
+Route::get('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware(['auth', isEmployer::class]); // , doNotAllowUserToMakePayment::class
 Route::get('pay/weekly', [SubscriptionController::class, 'initiatePayment'])->name('pay.weekly')->middleware(['auth', isEmployer::class, doNotAllowUserToMakePayment::class]);
 Route::get('pay/monthly', [SubscriptionController::class, 'initiatePayment'])->name('pay.monthly')->middleware(['auth', isEmployer::class, doNotAllowUserToMakePayment::class]);
 Route::get('pay/yearly', [SubscriptionController::class, 'initiatePayment'])->name('pay.yearly')->middleware(['auth', isEmployer::class, doNotAllowUserToMakePayment::class]);

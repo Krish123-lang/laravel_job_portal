@@ -1,41 +1,8 @@
-@extends('layouts.admin.main')
-@section('title')
-    Dashboard
-@endsection
-
-@section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success">{{ Session::get('success') }}</div>
-    @endif
-
-    @if (Session::has('error'))
-        <div class="alert alert-danger">{{ Session::get('error') }}</div>
-    @endif
-
-    {{-- <div class="row row-cols-1 row-cols-md-4 g-4"> --}}
+<main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">
-
-                <div class="mt-3 ">
-                    <h4>Hello, {{ auth()->user()->name }}</h4>
-                </div>
-
-                @if (!auth()->user()->billing_ends)
-                    @if (Auth::check() && auth()->user()->user_type == 'employer')
-                        <p>Your trial
-                            {{ now()->format('Y-m-d') > auth()->user()->user_trial ? 'was expired' : 'will expire' }} on
-                            <b>{{ auth()->user()->user_trial }}</b></p>
-                    @endif
-                @endif
-
-                @if (Auth::check() && auth()->user()->user_type == 'employer')
-                    <p>Your membership
-                        {{ now()->format('Y-m-d') > auth()->user()->billing_ends ? 'was expired' : 'will expire' }} on
-                        <b>{{ auth()->user()->billing_ends }}</b></p>
-                @endif
-            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
         </ol>
         <div class="row">
             <div class="col-xl-3 col-md-6">
@@ -585,5 +552,4 @@
             </div>
         </div>
     </div>
-    {{-- </div> --}}
-@endsection
+</main>

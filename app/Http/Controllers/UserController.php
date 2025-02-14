@@ -12,10 +12,10 @@ class UserController extends Controller
     const JOB_SEEKER = 'seeker';
     const JOB_POSTER = 'employer';
 
-    // public function index()
-    // {
-    //     return view('user.index');
-    // }
+    public function index()
+    {
+        return view('user.index');
+    }
 
     public function createSeeker()
     {
