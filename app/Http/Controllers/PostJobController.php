@@ -8,6 +8,6 @@ class PostJobController extends Controller
 {
     public function create()
     {
-        dd('create a job');
+        return view('job.create');
     }
 }
