@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobEditFormRequest;
 use App\Http\Requests\JobPostFormRequest;
 use App\Models\Listing;
 use Carbon\Carbon;
@@ -11,6 +12,12 @@ use Illuminate\Support\Str;
 
 class PostJobController extends Controller
 {
+    public function index()
+    {
+        $job_listings = Listing::all()->where('user_id', Auth::user()->id);
+        return view('job.index', compact('job_listings'));
+    }
+
     public function create()
     {
         return view('job.create');
@@ -32,11 +39,27 @@ class PostJobController extends Controller
         $post->slug = Str::slug($request->title) . '.' . Str::uuid();
 
         $post->save();
-        return back()->with('success', 'Job posted successfully!');
+        return to_route('job.index')->with('success', 'Job posted successfully!');
     }
 
     public function edit(Listing $listing)
     {
         return view('job.edit', compact('listing'));
+    }
+
+    public function update($id, JobEditFormRequest $request)
+    {
+        if ($request->hasFile('feature_image')) {
+            $featureImage = $request->file('feature_image')->store('images', 'public');
+            Listing::find($id)->update(['feature_image' => $featureImage]);
+        }
+        Listing::find($id)->update($request->except('feature_image'));
+        return to_route('job.index')->with('success', 'Job Updated successfully!');
+    }
+
+    public function delete(Listing $listing, $id)
+    {
+        Listing::find($id)->delete();
+        return to_route('job.index')->with('success', 'Record deleted!');
     }
 }

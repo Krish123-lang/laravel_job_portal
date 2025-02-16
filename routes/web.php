@@ -38,6 +38,9 @@ Route::get('pay/yearly', [SubscriptionController::class, 'initiatePayment'])->na
 Route::get('payment/success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success')->middleware('auth');
 Route::get('payment/cancel', [SubscriptionController::class, 'paymentCancel'])->name('payment.cancel')->middleware('auth');
 
-Route::get('job/create', [PostJobController::class, 'create'])->name('job.create')->middleware(isPremium::class);
-Route::post('job/store', [PostJobController::class, 'store'])->name('job.store')->middleware(isPremium::class);
-Route::post('job/{listing}/store', [PostJobController::class, 'edit'])->name('job.edit')->middleware(isPremium::class);
+Route::get('job', [PostJobController::class, 'index'])->name('job.index')->middleware('auth');
+Route::get('job/create', [PostJobController::class, 'create'])->name('job.create')->middleware(isPremium::class, 'auth');
+Route::post('job/store', [PostJobController::class, 'store'])->name('job.store')->middleware(isPremium::class, 'auth');
+Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.edit');
+Route::put('job/{id}/update', [PostJobController::class, 'update'])->name('job.update');
+Route::delete('job/{id}/delete', [PostJobController::class, 'delete'])->name('job.delete');
