@@ -1,4 +1,5 @@
 @include('layouts.admin.header')
+@stack('style')
 @include('layouts.admin.navbar')
 <div id="layoutSidenav">
 
@@ -19,3 +20,5 @@
 
     </div>
 </div>
+
+@stack('script')

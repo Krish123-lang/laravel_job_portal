@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,13 +14,15 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('slug')->unique();
+            $table->string('feature_image');
             $table->string('title');
             $table->text('description');
             $table->text('roles');
-            $table->string('job_type');
+            $table->enum('job_type', ['Full Time', 'Part Time', 'Casual', 'Contract']);
             $table->string('address');
-            $table->string('salary');
+            $table->decimal('salary', 10, 2);
             $table->date('application_close_date');
             $table->timestamps();
         });
