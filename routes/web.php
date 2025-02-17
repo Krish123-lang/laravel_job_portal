@@ -51,3 +51,4 @@ Route::post('user/profile', [UserController::class, 'update_profile'])->name('us
 
 Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware('auth');
 Route::post('user/password', [UserController::class, 'changePassword'])->name('user.password')->middleware('auth');
+Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upload.resume')->middleware('auth');

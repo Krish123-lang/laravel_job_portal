@@ -86,6 +86,29 @@
             </div>
         </div>
 
+        <div class="col-md-8 mt-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Update Your Resume</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('upload.resume') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <input type="file" class="form-control @error('resume') is-invalid @enderror" name="resume">
+                            @error('resume')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-secondary">Upload Resume</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

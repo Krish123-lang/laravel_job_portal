@@ -123,23 +123,6 @@ class UserController extends Controller
         return back()->with('success', 'Profile Updated successfully!');
     }
 
-    // public function changePassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'current_password' => 'required',
-    //         'new_password' => 'required|min:8|confirmed'
-    //     ]);
-    //     $user = Auth::user();
-    //     if (!Hash::check($request->current_password, $request->new_password)) {
-    //         return back()->with('error', 'Incorrect Password!');
-    //     }
-
-    //     $user->new_password = Hash::make($request->new_password);
-    //     $user->save();
-    //     return back()->with('success', 'Password changed successfully!');
-    // }
-
-
     public function changePassword(Request $request)
     {
         $request->validate([
@@ -157,5 +140,17 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('success', 'Your password has been changed successfully.');
+    }
+
+    public function uploadResume(Request $request){
+        $request->validate([
+            'resume'=>'required|mimes:pdf,doc,docx'
+        ]);
+        if ($request->hasFile('resume')) {
+            $resume = $request->file('resume')->store('resume', 'public');
+            User::find(Auth::user()->id)->update(['resume' => $resume]);
+        }
+        User::find(Auth::user()->id)->update($request->except('resume'));
+        return back()->with('success', 'Resume uploaded successfully!');
     }
 }
