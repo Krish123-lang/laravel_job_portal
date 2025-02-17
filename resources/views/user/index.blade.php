@@ -4,5 +4,9 @@
 @endsection
 
 @section('content')
-    <h1>Home</h1>
+    <div class="mt-3">
+        <div class="row justify-content-center">
+            <h1>Home</h1>
+        </div>
+    </div>
 @endsection

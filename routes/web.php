@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckAuth;
 use App\Http\Middleware\doNotAllowUserToMakePayment;
 use App\Http\Middleware\isEmployer;
 use App\Http\Middleware\isPremium;
@@ -11,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', [UserController::class, 'index'])->name('user.index');
-Route::get('register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker');
+Route::get('register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker')->middleware(CheckAuth::class);
 Route::post('register/seeker', [UserController::class, 'storeSeeker'])->name('store.seeker');
-Route::get('login', [UserController::class, 'login'])->name('login');
+Route::get('login', [UserController::class, 'login'])->name('login')->middleware(CheckAuth::class);
 Route::post('login', [UserController::class, 'postLogin'])->name('login.post');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('verified');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['verified', isPremium::class]);
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -24,7 +25,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::get('register/employer', [UserController::class, 'createEmployer'])->name('create.employer');
+Route::get('register/employer', [UserController::class, 'createEmployer'])->name('create.employer')->middleware(CheckAuth::class);
 Route::post('register/employer', [UserController::class, 'storeEmployer'])->name('store.employer');
 
 Route::get('verify', [DashboardController::class, 'verify'])->name('verification.notice');
@@ -44,3 +45,8 @@ Route::post('job/store', [PostJobController::class, 'store'])->name('job.store')
 Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.edit');
 Route::put('job/{id}/update', [PostJobController::class, 'update'])->name('job.update');
 Route::delete('job/{id}/delete', [PostJobController::class, 'delete'])->name('job.delete');
+
+Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
+Route::post('user/profile', [UserController::class, 'update_profile'])->name('user.update.profile')->middleware('auth');
+
+Route::get('user/profile/seeker', [UserController::class, 'seekerProfile'])->name('seeker.profile')->middleware('auth');

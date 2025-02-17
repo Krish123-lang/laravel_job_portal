@@ -42,6 +42,11 @@ class UserController extends Controller
         // return redirect()->route('verification.notice')->with('success', 'Your account was created!');
     }
 
+    public function seekerProfile()
+    {
+        return view('seeker.profile');
+    }
+
     public function createEmployer()
     {
         return view('user.employer-register');
@@ -81,7 +86,11 @@ class UserController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            if (Auth::user()->user_type == 'employer') {
+                return to_route('dashboard');
+            } else {
+                return to_route('user.index');
+            }
         }
     }
 
@@ -89,5 +98,28 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    // Profile Section
+    public function profile()
+    {
+        return view('profile.index');
+    }
+
+    public function update_profile(Request $request, User $user)
+    {
+        $request->validate([
+            'profile_pic' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'name' => 'nullable',
+        ]);
+
+        if ($request->hasFile('profile_pic')) {
+            $imagePath = $request->file('profile_pic')->store('profile', 'public');
+            User::find(Auth::user()->id)->update(['profile_pic' => $imagePath]);
+        }
+        User::find(Auth::user()->id)->update($request->except('profile_pic'));
+
+        // $user->update($request->all());
+        return back()->with('success', 'Profile Updated successfully!');
     }
 }
