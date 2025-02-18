@@ -35,12 +35,22 @@
 							@endif
 						</a>
 						<ul class="dropdown-menu">
-							<li class="nav-item">
-                                <a href="{{ route('seeker.profile') }}" class="nav-link text-light">{{ auth()->user()->name }}</a>
-                            </li>
-							<li class="nav-item">
-								<a class="nav-link" id="logout" href="#">Logout</a>
-							</li>
+                            @if (auth()->user()->user_type==='seeker')
+                                <li class="nav-item">
+                                    <a href="{{ route('seeker.profile') }}" class="nav-link text-light">{{ auth()->user()->name }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job.applied') }}" class="nav-link text-light">Job Applied</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="logout" href="#">Logout</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" id="dashboard" href="{{ route('dashboard') }}">Dashboard</a>
+                                </li>
+                            @endif
+
 						</ul>
 					</li>
                     @endif

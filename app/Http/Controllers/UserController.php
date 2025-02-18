@@ -153,4 +153,9 @@ class UserController extends Controller
         User::find(Auth::user()->id)->update($request->except('resume'));
         return back()->with('success', 'Resume uploaded successfully!');
     }
+
+    public function jobApplied(){
+        $users=User::with('listings')->where('id', Auth::user()->id)->get();
+        return view('seeker.job-applied', compact('users'));
+    }
 }
