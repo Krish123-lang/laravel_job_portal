@@ -20,4 +20,9 @@ class Listing extends Model
         'salary',
         'application_close_date',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'listing_user', 'listing_id', 'user_id')->withPivot('shortlisted')->withTimestamps();
+    }
 }
