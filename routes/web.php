@@ -56,3 +56,4 @@ Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upl
 
 Route::get('applicants', [ApplicantController::class, 'index'])->name('applicants.index');
 Route::get('applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
+Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])->name('applicants.shortlist');
