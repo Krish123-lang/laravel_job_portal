@@ -25,6 +25,26 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('user.index') }}">Home</a>
                     </li>
 
+                    @if (Auth::check())
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							@if(auth()->user()->profile_pic)
+							    <img src="{{Storage::url( auth()->user()->profile_pic)}}" width="40" height="40" class="rounded-circle">
+							@else 
+							    <img src="{{ asset('assets/img/profile.png') }}" class="rounded-circle" width="40" height="40">
+							@endif
+						</a>
+						<ul class="dropdown-menu">
+							<li class="nav-item">
+                                <a href="{{ route('seeker.profile') }}" class="nav-link text-light">{{ auth()->user()->name }}</a>
+                            </li>
+							<li class="nav-item">
+								<a class="nav-link" id="logout" href="#">Logout</a>
+							</li>
+						</ul>
+					</li>
+                    @endif
+
                     {{-- @if (Auth::check())
                         <li class="nav-item">
                             <a href="{{ route('seeker.profile') }}" class="nav-link text-light">{{ auth()->user()->name }}</a>
@@ -42,16 +62,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('create.employer') }}">Employer</a>
                         </li>
-                    @else
+                    {{-- @else
                         <li class="nav-item">
                             <a class="nav-link" id="logout" href="#">Logout</a>
-                        </li>
+                        </li> --}}
                         {{-- Here was the profile name --}}
-                        @if (Auth::check())
+                        {{-- @if (Auth::check())
                             <li class="nav-item">
                                 <a href="{{ route('seeker.profile') }}" class="nav-link text-light">{{ auth()->user()->name }}</a>
                             </li>
-                        @endif
+                        @endif --}}
                     @endif
 
                     <form id="form-logout" method="POST" action="{{ route('logout') }}">@csrf</form>
