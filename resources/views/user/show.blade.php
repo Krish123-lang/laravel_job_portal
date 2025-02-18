@@ -15,6 +15,11 @@
                             <div class="alert alert-success">{{ Session::get('success') }}</div>
                         @endif
 
+                        <a href="{{ route('user.company', $listing->profile->id) }}" class="text-decoration-none text-dark">
+                            <img src="{{Storage::url($listing->profile->profile_pic)}}" alt="{{$listing->profile->name}}" width="50" height="50" class="rounded-circle object-fit-cover">
+                            <b>{{$listing->profile->name}}</b>
+                        </a>
+
                         <h2 class="card-title">{{ $listing->title }}</h2>
                         <span class="badge bg-primary">{{ $listing->job_type }}</span>
 

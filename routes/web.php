@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', [JobListingController::class, 'index'])->name('user.index');
+Route::get('company/{id}', [JobListingController::class, 'company'])->name('user.company');
 Route::get('/jobs/{listing:slug}', [JobListingController::class, 'show'])->name('job.show');
 Route::post('resume/upload', [FileUploadController::class, 'store'])->name('resume.upload')->middleware('auth');
 
