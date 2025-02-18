@@ -20,14 +20,42 @@
 @section('content')
     <div class="mt-3">
         <div class="d-flex justify-content-between">
-            <h4>Recommended jobs</h4>
-            <button class="btn btn-dark">view</button>
+            <h4>Filter jobs</h4>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Salary
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['sort'=>'salary_high_to_low']) }}">High to low</a></li>
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['sort'=>'salary_low_to_high']) }}">Low to high</a></li>
+                </ul>
+
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Date
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['date'=>'latest']) }}">Latest</a></li>
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['date'=>'oldest']) }}">Oldest</a></li>
+                </ul>
+
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Job Type
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['job_type'=>'Full Time']) }}">Full Time</a></li>
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['job_type'=>'Part Time']) }}">Part Time</a></li>
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['job_type'=>'Casual']) }}">Casual</a></li>
+                    <li><a class="dropdown-item" href="{{ route('user.index', ['job_type'=>'Contract']) }}">Contract</a></li>
+                </ul>
+
+                <a class="btn btn-secondary" href="{{ route('user.index') }}">Reset</a>
+            </div>
         </div>
 
         <div class="row mt-2 g-1">
             @foreach ($jobs as $job)
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card {{$job->job_type}}">
                         <div class="position-absolute top-0 m-2">
                             <small class="badge text-bg-info">{{ $job->job_type }}</small>
                         </div>

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JobEditFormRequest;
 use App\Http\Requests\JobPostFormRequest;
 use App\Models\Listing;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
