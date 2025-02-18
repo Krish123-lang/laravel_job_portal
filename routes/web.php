@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -12,7 +14,11 @@ use App\Http\Middleware\isPremium;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::get('/', [UserController::class, 'index'])->name('user.index');
+Route::get('/', [JobListingController::class, 'index'])->name('user.index');
+Route::get('/jobs/{listing:slug}', [JobListingController::class, 'show'])->name('job.show');
+Route::post('resume/upload', [FileUploadController::class, 'store'])->name('resume.upload')->middleware('auth');
+
+// Route::get('/', [UserController::class, 'index'])->name('user.index');
 Route::get('register/seeker', [UserController::class, 'createSeeker'])->name('create.seeker')->middleware(CheckAuth::class);
 Route::post('register/seeker', [UserController::class, 'storeSeeker'])->name('store.seeker');
 Route::get('login', [UserController::class, 'login'])->name('login')->middleware(CheckAuth::class);
@@ -22,7 +28,6 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
     return redirect('login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -57,3 +62,5 @@ Route::post('upload/resume', [UserController::class, 'uploadResume'])->name('upl
 Route::get('applicants', [ApplicantController::class, 'index'])->name('applicants.index');
 Route::get('applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
 Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])->name('applicants.shortlist');
+
+Route::post('application/{listingId}/submit', [ApplicantController::class, 'apply'])->name('application.submit');
