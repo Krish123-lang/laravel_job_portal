@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Mail\ShortlistMail;
 use App\Models\Listing;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class ApplicantController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $listings = Listing::latest()->withCount('users')->where('user_id', Auth::user()->id)->get();
@@ -18,6 +20,7 @@ class ApplicantController extends Controller
 
     public function show(Listing $listing)
     {
+        $this->authorize('view', $listing);
         $listings = Listing::with('users')->where('slug', $listing->slug)->first();
         return view('applicants.show', compact('listings'));
     }

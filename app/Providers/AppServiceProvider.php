@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Listing;
+use App\Policies\ListingPolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+    protected $policies = [
+        Listing::class => ListingPolicy::class
+    ];
 
     /**
      * Bootstrap any application services.
