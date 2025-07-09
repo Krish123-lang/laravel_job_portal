@@ -8,7 +8,7 @@
 
         @include('message')
 
-        <div class="row mt-5">
+        <div class="row mt-5 d-flex justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header fs-3 fw-semibold">Login</div>

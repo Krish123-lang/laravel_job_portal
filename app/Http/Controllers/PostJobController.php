@@ -12,7 +12,7 @@ class PostJobController extends Controller
 {
     public function index()
     {
-        $job_listings = Listing::all()->where('user_id', Auth::user()->id);
+        $job_listings = Listing::where('user_id', Auth::user()->id)->latest()->get();
         return view('job.index', compact('job_listings'));
     }
 
@@ -43,6 +43,11 @@ class PostJobController extends Controller
     public function edit(Listing $listing)
     {
         return view('job.edit', compact('listing'));
+    }
+
+    public function show(Listing $listing)
+    {
+        return view('job.show', compact('listing'));
     }
 
     public function update($id, JobEditFormRequest $request)

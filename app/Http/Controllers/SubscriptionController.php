@@ -14,8 +14,8 @@ use Stripe\Stripe;
 class SubscriptionController extends Controller
 {
     const WEEKLY_AMOUNT = 20;
-    const MONTHLY_AMOUNT = 20;
-    const YEARLY_AMOUNT = 20;
+    const MONTHLY_AMOUNT = 80;
+    const YEARLY_AMOUNT = 200;
     const CURRENCY = 'usd';
 
     public function subscribe()

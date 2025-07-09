@@ -21,11 +21,20 @@
                         </a>
 
                         <h2 class="card-title">{{ $listing->title }}</h2>
-                        <span class="badge bg-primary">{{ $listing->job_type }}</span>
+
+                        <div class="mb-4">
+                            <span class="badge bg-info text-dark me-2"><i class="fa-solid fa-suitcase"></i> {{ $listing->job_type }}</span>
+                            <span class="badge bg-secondary me-2"><i class="fa-solid fa-location-dot"></i> {{ $listing->address }}</span>
+                            <span class="badge bg-success me-2"><i class="fa-solid fa-dollar-sign"></i> {{ $listing->salary }}</span>
+                            <span class="badge bg-light text-muted"><i class="fa-solid fa-calendar-days"></i> {{ $listing->created_at->format('Y-m-d') }}</span>
+                        </div>
+
+                        {{-- <span class="badge bg-primary">{{ $listing->job_type }}</span> --}}
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item fw-bold">Salary: ${{ number_format($listing->salary, 2) }}</li>
-                            <li class="list-group-item fw-bold">Address: {{ $listing->address }}</li>
+                            {{-- <li class="list-group-item fw-bold">Salary: ${{ number_format($listing->salary, 2) }}</li>
+                            <li class="list-group-item fw-bold">Address: {{ $listing->address }}</li> --}}
+                            <hr>
                             <li class="list-group-item">
                                 <h4 class="mt-3">Description</h4>
                                 <p class="card-text">{!! $listing->description !!}</p>
@@ -52,17 +61,24 @@
                         <p class="card-text mt-4 text-body-secondary">Application closing date: {{ $listing->application_close_date }}</p> --}}
 
                         @if (Auth::check())
-                            @if (Auth::user()->resume)
-                            <form action="{{ route('application.submit', $listing->id) }}" method="post">
-                                @csrf
-                                <button class="btn btn-primary mt-3">Apply Now</button>
-                            </form>
+                            @if ($hasApplied)
+                                <button class="btn btn-success mt-3" disabled>Already Applied</button>
+
+                                {{-- Uncomment this code to use the existing resume that was uploaded at the first time of applying for the job.
+                                 If it is uncommented then, the applicant will not be prompted to upload their resume.
+                                 Exiting resume will be uploaded !!! --}}
+
+                            {{-- @elseif (Auth::user()->resume)
+                                <form action="{{ route('application.submit', $listing->id) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-primary mt-3">Apply Now</button>
+                                </form> --}}
                             @else
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Apply
                                 </button>
                             @endif
-                            @else
+                        @else
                             <p>Please login to apply!</p>
                         @endif
 
@@ -137,7 +153,7 @@
 
 
 
-        //     const inputElement = document.querySelector('input[type="file"]');    
+        //     const inputElement = document.querySelector('input[type="file"]');
         //     const pond = FilePond.create(inputElement);
 
         //     pond.setOptions({

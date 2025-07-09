@@ -92,6 +92,9 @@ class UserController extends Controller
                 return to_route('user.index');
             }
         }
+        else{
+            return back()->with('error',"Invalid Credentials");
+        }
     }
 
     public function logout()
@@ -127,7 +130,7 @@ class UserController extends Controller
     {
         $request->validate([
             'current_password' => ['required'],
-            'new_password' => ['required', 'min:8', 'confirmed', 'different:current_password'], 
+            'new_password' => ['required', 'min:8', 'confirmed', 'different:current_password'],
         ]);
 
         $user = Auth::user();

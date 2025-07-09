@@ -30,4 +30,8 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function applications(){
+        return $this->belongsToMany(User::class, 'listing_user', 'listing_id', 'user_id')->withTimestamps()->withPivot('shortlisted');
+    }
 }

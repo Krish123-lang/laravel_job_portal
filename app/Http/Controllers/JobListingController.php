@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobListingController extends Controller
 {
@@ -46,7 +47,8 @@ class JobListingController extends Controller
 
     public function show(Listing $listing)
     {
-        return view('user.show', compact('listing'));
+        $hasApplied=$listing->applications()->where('user_id', Auth::id())->exists();
+        return view('user.show', compact('listing', 'hasApplied'));
     }
 
     public function company($id)

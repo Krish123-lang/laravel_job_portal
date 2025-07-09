@@ -60,7 +60,7 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <img src="{{ asset('storage/' . $listing->feature_image) }}" alt="Feature Image" width="1000">
+                                                <img src="{{ asset('storage/' . $listing->feature_image) }}" class="card-img-top rounded-top" alt="Feature Image" style="object-fit:cover;">
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -69,17 +69,22 @@
                                         </div>
                                       </div>
                                 </td>
-                                <td>{{ $listing->title }}</td>
-                                <td>{{ Str::limit($listing->description, 20, '...') }}</td>
-                                <td>{{ $listing->roles }}</td>
+                                {{-- <td>{!! Str::limit($listing->title, 50, '...') !!}</td>
+                                <td>{!! Str::limit($listing->description, 50, '...') !!}</td>
+                                <td>{!! Str::limit($listing->roles, 50, '...') !!}</td> --}}
+
+                                <td>{{ Str::limit($listing->title, 50, '...') }}</td>
+                                <td>{{ Str::limit(strip_tags($listing->description), 50, '...') }}</td>
+                                <td>{{ Str::limit(strip_tags($listing->roles), 50, '...') }}</td>
+
                                 <td>{{ $listing->job_type }}</td>
                                 <td>{{ $listing->address }}</td>
                                 <td>${{ $listing->salary }}</td>
                                 <td>{{ $listing->created_at->format('Y-m-d') }}</td>
-                                <td>
+                                <td class="d-grid gap-2 mx-auto">
+                                    <a href="{{ route('job.admin.show', $listing->id) }}" class="btn btn-sm btn-primary">Show</a>
                                     <a href="{{ route('job.edit', $listing->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="{{ route('job.delete', $listing->id) }}" class="btn btn-sm btn-danger"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal{{ $listing->id }}">Delete</a>
+                                    <a href="{{ route('job.delete', $listing->id) }}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $listing->id }}">Delete</a>
 
                                     <form action="{{ route('job.delete', $listing->id) }}" method="post">
                                         @csrf
@@ -89,17 +94,14 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete |
-                                                            {{ $listing->title }}</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete | {{ $listing->title }}</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         Do you want to delete this record?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">No</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                                         <button type="submit" class="btn btn-danger">Yes, Delete</button>
                                                     </div>
                                                 </div>

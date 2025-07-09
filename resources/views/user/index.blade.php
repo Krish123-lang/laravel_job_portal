@@ -53,30 +53,35 @@
         </div>
 
         <div class="row mt-2 g-1">
-            @foreach ($jobs as $job)
+            @forelse ($jobs as $job)
                 <div class="col-md-3">
-                    <div class="card {{$job->job_type}}">
+                    <div class="card  {{$job->job_type}}" style="height: 30em;">
                         <div class="position-absolute top-0 m-2">
                             <small class="badge text-bg-info">{{ $job->job_type }}</small>
                         </div>
                         {{-- {{ Storage::url($job->profile->profile_pic) }} --}}
-                        <img class="card-img-top" height="200" src="{{ Storage::url($job->feature_image) }}" alt="{{ $job->title }}">
-        
-                        <div class="card-body text-center">
-                            <span class="d-block fw-bold card-title">{{ $job->title }}</span>
+                        <img class="card-img-top"  src="{{ Storage::url($job->feature_image) }}" alt="{{ $job->title }}" style="max-height: 170px">
+
+                        <div class="card-body d-flex flex-column h-100 text-center">
+                            <span class="d-block fw-bold fs-6 card-title">{{ Str::limit($job->title, 50) }}</span>
                             <hr>
-                            <span class="card-text mb-1">{{ $job->profile->name }}</span>
-                            <div class="text-muted">{{ $job->address }}</div>
-        
-                            <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="d-block text-muted card-title" style="font-size: 13px">{{ Str::limit(strip_tags($job->description), 50, '...') }}</span>
+                            <hr>
+                            <div class="flex-grow-1 d-flex flex-column justify-content-end">
+                                <span class="card-text mb-1"><p class="text-muted d-inline">Posted by:</p> {{ $job->profile->name }}</span>
+                                <div class="text-muted"><i class="fa-solid fa-location-dot"></i> {{ $job->address }}</div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3">
                                 <span class="fw-semibold">${{ number_format($job->salary, 2) }}</span>
                                 <a href="{{ route('job.show', $job->slug) }}"><button class="btn btn-dark">Apply Now</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h1>No Jobs Found!</h1>
+            @endforelse
         </div>
-        
+
     </div>
 @endsection
