@@ -127,7 +127,7 @@ A full-featured Job Portal built using **Laravel 11**. This platform allows **em
 
 # Installation
 
-> Import the `jobportal.sql` file in your phpadmin dashboard.
+- Import the `jobportal.sql` file in your phpadmin dashboard.
 
 1. Clone the repo
 `git clone https://github.com/Krish123-lang/laravel_job_portal.git`
@@ -159,12 +159,16 @@ A full-featured Job Portal built using **Laravel 11**. This platform allows **em
 
 # Testing Credentials
 
-** Employer **
+**<ins>Employer</ins>**
+
 Email: poveloqyho@mailinator.com
+
 Password: password
 
-** Job Seeker **
+**<ins>Job Seeker</ins>**
+
 Email: dufylila@mailinator.com
+
 Password: password
 
 ---
