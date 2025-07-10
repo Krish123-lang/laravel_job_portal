@@ -43,7 +43,9 @@
                     </div>
                 </div>
             @empty
-                <h1>No Applicants have applied yet!!</h1>
+                <div class="">
+                    <h1 class="text-center lh-lg">No Applicants have applied yet!!</h1>
+                </div>
             @endforelse
         </div>
     </div>
