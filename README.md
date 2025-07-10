@@ -31,7 +31,61 @@ A full-featured Job Portal built using **Laravel 11**. This platform allows **em
 
 ## Screenshots
 
+> ### _Seeker_
 
+- Home Page
+
+![homePage](https://github.com/user-attachments/assets/c1803b75-d3c9-4056-b6fc-8235d296d17c)
+
+- Job Seeker Login
+
+![JobseekerLogin](https://github.com/user-attachments/assets/9f930293-507d-4653-95bb-63938a0d7199)
+
+- Employer Login
+
+![EmployerLogin](https://github.com/user-attachments/assets/8026e39b-c879-4912-8852-58a32d6d5ed3)
+
+- Account Verification Email
+
+![accountVerificationEmail](https://github.com/user-attachments/assets/8514590c-c711-478c-8b87-fbc0a9e55a3b)
+
+- Viewing a Job
+
+![singleJob](https://github.com/user-attachments/assets/ce06e313-7e4a-45eb-8f7f-2da9c5fa00c9)
+
+- Uploading Resume while Applying
+
+![uploadingResumeWhileApplying](https://github.com/user-attachments/assets/95dcdfd2-159b-4269-aa0a-a0d9155d8b70)
+
+- Job Seeker Profile
+
+![SeekerProfilePage](https://github.com/user-attachments/assets/8981840a-7737-4c8c-b47c-e97ae09a01c6)
+
+- List of Applied jobs
+
+![listOfAppliedJobs](https://github.com/user-attachments/assets/cbf2008d-07ed-48c7-a9e0-59d85c597928)
+
+---
+
+> ### _Employer_
+
+![employerDashboard](https://github.com/user-attachments/assets/6a9cb53f-189d-4916-99c4-60f112ae8859)
+
+![EmployerProfile](https://github.com/user-attachments/assets/35f75d1b-085e-40e2-99dd-c252503cfded)
+
+![createJob](https://github.com/user-attachments/assets/d214b5fa-6bd4-4e19-9de2-1c1a71a5001c)
+
+![viewAllJobs](https://github.com/user-attachments/assets/24fd9ff7-f233-4b5d-9e28-7d2efacabcd1)
+
+![employerSelectingSubscriptionPlan](https://github.com/user-attachments/assets/268adc59-b6b1-4663-b339-d515fb28c39b)
+
+![StripePayment](https://github.com/user-attachments/assets/2f1b7104-64f0-4532-afd9-cec739e3290b)
+
+![PaymentSuccessful](https://github.com/user-attachments/assets/e9e0cc23-d5ca-415c-91ba-fa010503cee4)
+
+![ListOfApplicants](https://github.com/user-attachments/assets/ce8e2da3-a07c-4fc2-b735-bf8e48361a99)
+
+![ViewingApplicants](https://github.com/user-attachments/assets/99d195f8-0b49-4dc9-8612-53b71509e548)
 
 ---
 
