@@ -69,21 +69,39 @@ A full-featured Job Portal built using **Laravel 11**. This platform allows **em
 
 > ### _Employer_
 
+- Employer Dashboard
+
 ![employerDashboard](https://github.com/user-attachments/assets/6a9cb53f-189d-4916-99c4-60f112ae8859)
+
+- Employer Profile
 
 ![EmployerProfile](https://github.com/user-attachments/assets/35f75d1b-085e-40e2-99dd-c252503cfded)
 
+- Create Job
+
 ![createJob](https://github.com/user-attachments/assets/d214b5fa-6bd4-4e19-9de2-1c1a71a5001c)
+
+- View All jobs
 
 ![viewAllJobs](https://github.com/user-attachments/assets/24fd9ff7-f233-4b5d-9e28-7d2efacabcd1)
 
+- Selecting Subscription Plan
+
 ![employerSelectingSubscriptionPlan](https://github.com/user-attachments/assets/268adc59-b6b1-4663-b339-d515fb28c39b)
+
+- Payment through Stripe
 
 ![StripePayment](https://github.com/user-attachments/assets/2f1b7104-64f0-4532-afd9-cec739e3290b)
 
+- Payment successful Message
+
 ![PaymentSuccessful](https://github.com/user-attachments/assets/e9e0cc23-d5ca-415c-91ba-fa010503cee4)
 
+- List of Applicants
+
 ![ListOfApplicants](https://github.com/user-attachments/assets/ce8e2da3-a07c-4fc2-b735-bf8e48361a99)
+
+- Viewing All Applicants
 
 ![ViewingApplicants](https://github.com/user-attachments/assets/99d195f8-0b49-4dc9-8612-53b71509e548)
 
