@@ -29,13 +29,13 @@ A full-featured Job Portal built using **Laravel 11**. This platform allows **em
 
 ---
 
-## 🖥️ Screenshots
+## Screenshots
 
-> _Add screenshots of key pages like login, job listings, dashboards, etc._
+
 
 ---
 
-## 📁 Project Structure (Simplified)
+## Project Structure (Simplified)
 
 ```bash
 ├── app/
@@ -103,8 +103,9 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 ---
 
 # Author
-** Krishna **
-🔗 [Githu](https://github.com/Krish123-lang/) | 💼 Laravel Developer | 🚀 Passionate about Full Stack Development
+**Krishna**
+
+[Github](https://github.com/Krish123-lang/) | Laravel Developer | Passionate about Full Stack Development
 
 ---
 
